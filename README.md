@@ -31,4 +31,4 @@ It asks for **Geist** and **Geist Mono** (free, by Vercel). If they aren't insta
 
 ## Licence
 
-MIT, see [LICENSE](LICENSE).
+[PolyForm Strict 1.0.0](https://polyformproject.org/licenses/strict/1.0.0), see [LICENSE](LICENSE). Free to use for yourself and for any other noncommercial purpose. Selling it, passing copies on and publishing changed versions are not allowed. Your own tweaks in a CSS snippet next to the theme are fine.
