@@ -1,0 +1,301 @@
+/* Rho Zero: a dark theme for Obsidian, made to sit with the Rho Network plugin.
+   Near-black #050607, warm off-white #E9E6DF, hairline panels, Geist and Geist Mono, small spaced-out mono labels,
+   numbered top folders, and a few soft status colours (mint, salmon, sand, lilac, sky).
+   Dark mode only (Settings > Appearance > Base color scheme: Dark).
+   Fonts: Geist / Geist Mono if installed, otherwise the system's own sans and mono. */
+
+/* ==== The base: black, white and greys ==== */
+.theme-dark {
+  --background-primary: #0d0d0d;
+  --background-primary-alt: #121212;
+  --background-secondary: #141414;
+  --background-secondary-alt: #1b1b1b;
+  --background-modifier-border: #2a2a2a;
+  --background-modifier-border-hover: #3a3a3a;
+  --background-modifier-border-focus: #5a5a5a;
+  --background-modifier-hover: rgba(255, 255, 255, 0.06);
+  --background-modifier-active-hover: rgba(255, 255, 255, 0.10);
+  --background-modifier-form-field: #161616;
+  --titlebar-background: #0a0a0a;
+  --titlebar-background-focused: #121212;
+
+  --text-normal: #e8e8e8;
+  --text-muted: #a3a3a3;
+  --text-faint: #6b6b6b;
+  --text-on-accent: #0d0d0d;
+  --text-accent: #d6d6d6;
+  --text-accent-hover: #ffffff;
+  --text-selection: rgba(255, 255, 255, 0.18);
+  --text-highlight-bg: rgba(255, 255, 255, 0.16);
+
+  /* The accent (buttons, toggles, the active file) is a light grey, not a colour */
+  --accent-h: 0;
+  --accent-s: 0%;
+  --accent-l: 74%;
+  --color-accent: #bdbdbd;
+  --color-accent-1: #cfcfcf;
+  --color-accent-2: #e0e0e0;
+  --interactive-accent: #bdbdbd;
+  --interactive-accent-hover: #d9d9d9;
+
+  /* Links are underlined, since they aren't told apart by colour */
+  --link-color: #d9d9d9;
+  --link-color-hover: #ffffff;
+  --link-decoration: underline;
+  --link-decoration-thickness: 1px;
+  --link-unresolved-color: #7a7a7a;
+  --link-unresolved-decoration-style: dotted;
+  --link-external-color: #d9d9d9;
+  --link-external-color-hover: #ffffff;
+
+  /* Obsidian's named colours as greys (the layer below brings some soft colour back) */
+  --color-red-rgb: 200, 200, 200;      --color-red: #c8c8c8;
+  --color-orange-rgb: 185, 185, 185;   --color-orange: #b9b9b9;
+  --color-yellow-rgb: 215, 215, 215;   --color-yellow: #d7d7d7;
+  --color-green-rgb: 170, 170, 170;    --color-green: #aaaaaa;
+  --color-cyan-rgb: 160, 160, 160;     --color-cyan: #a0a0a0;
+  --color-blue-rgb: 150, 150, 150;     --color-blue: #969696;
+  --color-purple-rgb: 140, 140, 140;   --color-purple: #8c8c8c;
+  --color-pink-rgb: 175, 175, 175;     --color-pink: #afafaf;
+
+  --tag-color: #cfcfcf;
+  --tag-background: rgba(255, 255, 255, 0.07);
+  --tag-background-hover: rgba(255, 255, 255, 0.12);
+  --checkbox-color: #bdbdbd;
+  --checkbox-color-hover: #d9d9d9;
+  --checkbox-marker-color: #0d0d0d;
+  --blockquote-border-color: #4a4a4a;
+  --hr-color: #2f2f2f;
+
+  /* Code: greys instead of syntax colours */
+  --code-background: #161616;
+  --code-normal: #e0e0e0;
+  --code-comment: #6b6b6b;
+  --code-function: #d9d9d9;
+  --code-important: #ffffff;
+  --code-keyword: #bdbdbd;
+  --code-operator: #a3a3a3;
+  --code-property: #c8c8c8;
+  --code-punctuation: #8c8c8c;
+  --code-string: #b0b0b0;
+  --code-tag: #c8c8c8;
+  --code-value: #d0d0d0;
+}
+
+/* Callouts: one grey, whatever their type */
+.theme-dark .callout {
+  --callout-color: 170, 170, 170;
+}
+
+/* The graph: black, white nodes, faint lines */
+.workspace-leaf-content[data-type="graph"] .view-content,
+.workspace-leaf-content[data-type="localgraph"] .view-content {
+  background-color: #050505;
+}
+.graph-view.color-fill { color: #ffffff; }
+.graph-view.color-fill-focused,
+.graph-view.color-fill-highlight { color: #ffffff; }
+.graph-view.color-circle { color: #ffffff; }
+.graph-view.color-line,
+.graph-view.color-arrow { color: #2e2e2e; }
+.graph-view.color-line-highlight { color: #d9d9d9; }
+.graph-view.color-text { color: #cfcfcf; }
+.graph-view.color-fill-unresolved { color: #3a3a3a; }
+.graph-view.color-fill-tag { color: #8c8c8c; }
+.graph-view.color-fill-attachment { color: #6b6b6b; }
+
+/* Mermaid charts: neutral grey axes, labels and titles. Obsidian draws Mermaid light and flips it for dark mode
+   (invert + hue-rotate), so these are written as their opposites: #3a3a3a shows as #c5c5c5, #2a2a2a as #d5d5d5. */
+.mermaid g[class$="-axis"] path {
+  stroke: #3a3a3a !important;
+}
+.mermaid g[class$="-axis"] text,
+.mermaid g.chart-title text {
+  fill: #2a2a2a !important;
+}
+
+/* ==== On top: the Zero look. Every rule starts with body.theme-dark, so it wins over the base. ==== */
+body.theme-dark {
+  --pz-bg: #050607;
+  --pz-panel: #0a0b0d;
+  --pz-panel-2: #0f1113;
+  --pz-text: #e9e6df;
+  --pz-text-2: #b9b6ae;
+  --pz-muted: #85878b;
+  --pz-faint: #55585e;
+  --pz-line: rgba(232, 230, 225, 0.075);
+  --pz-line-2: rgba(232, 230, 225, 0.14);
+  --pz-mint: #8fd9b6;
+  --pz-salmon: #e88b7a;
+  --pz-sand: #efe0b0;
+  --pz-lilac: #b8a8f0;
+  --pz-sky: #9cc8f0;
+
+  --font-interface-theme: "Geist", "Segoe UI", system-ui, sans-serif;
+  --font-text-theme: "Geist", "Segoe UI", system-ui, sans-serif;
+  --font-monospace-theme: "Geist Mono", "Cascadia Mono", Consolas, Menlo, monospace;
+
+  --background-primary: var(--pz-bg);
+  --background-primary-alt: var(--pz-panel);
+  --background-secondary: var(--pz-bg);
+  --background-secondary-alt: var(--pz-panel);
+  --background-modifier-border: var(--pz-line-2);
+  --background-modifier-border-hover: rgba(232, 230, 225, 0.22);
+  --background-modifier-border-focus: rgba(232, 230, 225, 0.35);
+  --background-modifier-hover: rgba(232, 230, 225, 0.05);
+  --background-modifier-active-hover: rgba(232, 230, 225, 0.09);
+  --background-modifier-form-field: var(--pz-panel);
+  --divider-color: var(--pz-line-2);
+  --titlebar-background: var(--pz-bg);
+  --titlebar-background-focused: var(--pz-bg);
+  --tab-container-background: var(--pz-bg);
+
+  --text-normal: var(--pz-text);
+  --text-muted: var(--pz-text-2);
+  --text-faint: var(--pz-faint);
+  --text-on-accent: var(--pz-bg);
+  --text-accent: var(--pz-text);
+  --text-accent-hover: #ffffff;
+  --text-selection: rgba(232, 230, 225, 0.16);
+  --text-highlight-bg: rgba(239, 224, 176, 0.20);
+
+  --accent-h: 43;
+  --accent-s: 14%;
+  --accent-l: 89%;
+  --color-accent: var(--pz-text);
+  --color-accent-1: #f1eee8;
+  --color-accent-2: #ffffff;
+  --interactive-accent: var(--pz-text);
+  --interactive-accent-hover: #ffffff;
+
+  --link-color: var(--pz-text);
+  --link-color-hover: #ffffff;
+  --link-decoration-color: var(--pz-faint);
+  --link-unresolved-color: var(--pz-muted);
+  --link-external-color: var(--pz-sky);
+  --link-external-color-hover: #c6e0f7;
+
+  /* The soft status colours, for Obsidian's named colours (callout types, tags, highlights) */
+  --color-green-rgb: 143, 217, 182;  --color-green: var(--pz-mint);
+  --color-red-rgb: 232, 139, 122;    --color-red: var(--pz-salmon);
+  --color-orange-rgb: 240, 160, 140; --color-orange: #f0a08c;
+  --color-yellow-rgb: 239, 224, 176; --color-yellow: var(--pz-sand);
+  --color-purple-rgb: 184, 168, 240; --color-purple: var(--pz-lilac);
+  --color-blue-rgb: 156, 200, 240;   --color-blue: var(--pz-sky);
+  --color-cyan-rgb: 156, 200, 240;   --color-cyan: var(--pz-sky);
+
+  --tag-color: var(--pz-mint);
+  --tag-background: rgba(143, 217, 182, 0.07);
+  --tag-background-hover: rgba(143, 217, 182, 0.13);
+  --checkbox-color: var(--pz-mint);
+  --checkbox-color-hover: #a9e6c9;
+  --checkbox-marker-color: var(--pz-bg);
+  --blockquote-border-color: var(--pz-line-2);
+  --hr-color: var(--pz-line-2);
+  --table-border-color: var(--pz-line-2);
+  --table-header-background: var(--pz-panel);
+  --code-background: var(--pz-panel);
+
+  --radius-s: 2px;
+  --radius-m: 3px;
+  --radius-l: 4px;
+  --radius-xl: 6px;
+}
+
+/* Headings: the title in plain Geist, the sections as small spaced-out mono labels */
+body.theme-dark .markdown-rendered h1,
+body.theme-dark .HyperMD-header-1 {
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+body.theme-dark .markdown-rendered h2,
+body.theme-dark .markdown-rendered h3,
+body.theme-dark .HyperMD-header-2,
+body.theme-dark .HyperMD-header-3 {
+  font-family: var(--font-monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 500;
+  color: var(--pz-text-2);
+}
+body.theme-dark .markdown-rendered h2,
+body.theme-dark .HyperMD-header-2 { font-size: 0.82em; }
+body.theme-dark .markdown-rendered h3,
+body.theme-dark .HyperMD-header-3 { font-size: 0.74em; color: var(--pz-muted); }
+body.theme-dark .markdown-rendered h2 {
+  border-bottom: 1px solid var(--pz-line-2);
+  padding-bottom: 0.45em;
+  margin-top: 2.2em;
+}
+body.theme-dark .markdown-rendered strong { color: #f4f2ed; font-weight: 600; }
+
+/* Panels: tables, callouts and code as hairline-bordered boxes */
+body.theme-dark .markdown-rendered table { border: 1px solid var(--pz-line-2); }
+body.theme-dark .markdown-rendered th {
+  font-family: var(--font-monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72em;
+  font-weight: 500;
+  color: var(--pz-muted);
+}
+body.theme-dark .markdown-rendered td { font-variant-numeric: tabular-nums; }
+body.theme-dark .callout {
+  background: var(--pz-panel);
+  border: 1px solid var(--pz-line-2);
+  border-radius: var(--radius-m);
+}
+body.theme-dark .callout-title {
+  font-family: var(--font-monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78em;
+}
+body.theme-dark .markdown-rendered pre,
+body.theme-dark .markdown-rendered code { border: 1px solid var(--pz-line); }
+
+/* The sidebar: top folders numbered like a menu ("1 PROJECTS"), in small mono capitals */
+body.theme-dark .nav-folder.mod-root > .nav-folder-children { counter-reset: pz-folder; }
+body.theme-dark .nav-folder.mod-root > .nav-folder-children > .nav-folder > .nav-folder-title .nav-folder-title-content::before {
+  counter-increment: pz-folder;
+  content: counter(pz-folder);
+  display: inline-block;
+  width: 1.6em;
+  color: var(--pz-faint);
+}
+body.theme-dark .nav-folder-title {
+  font-family: var(--font-monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 11px;
+  color: var(--pz-text-2);
+}
+body.theme-dark .nav-file-title { font-size: 13px; color: var(--pz-muted); }
+body.theme-dark .nav-file-title.is-active { color: var(--pz-text); }
+
+/* Tabs, note headers and the status bar: mono labels too */
+body.theme-dark .workspace-tab-header-inner-title,
+body.theme-dark .view-header-title,
+body.theme-dark .status-bar {
+  font-family: var(--font-monospace);
+  letter-spacing: 0.06em;
+}
+body.theme-dark .status-bar {
+  text-transform: uppercase;
+  font-size: 10.5px;
+  color: var(--pz-faint);
+  border-top: 1px solid var(--pz-line);
+}
+
+/* The graph: the dark field, warm white nodes, faint lines */
+body.theme-dark .workspace-leaf-content[data-type="graph"] .view-content,
+body.theme-dark .workspace-leaf-content[data-type="localgraph"] .view-content { background-color: var(--pz-bg); }
+body.theme-dark .graph-view.color-fill,
+body.theme-dark .graph-view.color-circle,
+body.theme-dark .graph-view.color-fill-focused,
+body.theme-dark .graph-view.color-fill-highlight { color: var(--pz-text); }
+body.theme-dark .graph-view.color-line,
+body.theme-dark .graph-view.color-arrow { color: #22252a; }
+body.theme-dark .graph-view.color-line-highlight { color: var(--pz-text-2); }
+body.theme-dark .graph-view.color-text { color: var(--pz-text-2); }
+body.theme-dark .graph-view.color-fill-tag { color: var(--pz-mint); }
